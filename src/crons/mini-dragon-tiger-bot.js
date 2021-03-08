@@ -4,7 +4,7 @@ import { Core, Table } from "sc-game-base";
 
 import constants from "../constants";
 
-export default class MiniSeDieBot extends Core.Crons.BaseBot {
+export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
     /**
      * @param {Table.TableGameDefinition} definition
      * @param {Table.TableGameData} gameData
@@ -16,14 +16,12 @@ export default class MiniSeDieBot extends Core.Crons.BaseBot {
         super(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
 
         this.betChoiceRatio = {
-            MainOpts: 90, //odd | even
-            SubOpts: 7, //white3 | red3
-            RareOpts: 3, //red4 | white4
+            MainOpts: 99, //odd | even
+            RareOpts: 1, //red4 | white4
         };
 
-        this.mainOpts = ["even", "odd"];
-        this.subOpts = ["white3", "red3"];
-        this.rareOpts = ["red4", "white4"];
+        this.mainOpts = ["dragon", "tiger"];
+        this.rareOpts = ["tie"];
 
         this.smallTicketRatio = 70;
         this.smallTickets = 0;
@@ -37,12 +35,9 @@ export default class MiniSeDieBot extends Core.Crons.BaseBot {
 
     resetAllBets() {
         this.allBets = {
-            odd: 0,
-            even: 0,
-            white3: 0,
-            red3: 0,
-            red4: 0,
-            white4: 0,
+            dragon: 0,
+            tiger: 0,
+            tie: 0,
         };
 
         this.smallTickets = 0;
@@ -55,10 +50,6 @@ export default class MiniSeDieBot extends Core.Crons.BaseBot {
             {
                 group: this.mainOpts,
                 underBetRatio: (this.getTotalAmountOnChoiceGroup(this.mainOpts) * 100) / totalBotBet < this.betChoiceRatio.MainOpts,
-            },
-            {
-                group: this.subOpts,
-                underBetRatio: (this.getTotalAmountOnChoiceGroup(this.subOpts) * 100) / totalBotBet < this.betChoiceRatio.SubOpts,
             },
             {
                 group: this.rareOpts,
@@ -93,18 +84,6 @@ export default class MiniSeDieBot extends Core.Crons.BaseBot {
             if (totalAmountOnRateOpts > 0) {
                 maxBet -= totalAmountOnRateOpts;
             }
-        }
-
-        if (this.subOpts.includes(choice)) {
-            const totalBetOnSubOpt = this.getTotalAmountOnChoiceGroup(this.subOpts);
-
-            maxBet = isSmallTicket
-                ? Math.min(maxBetOfSmallTicket, gameConfigs.bot_maxbet * 0.2, gameConfigs.choices_maxbet[choice])
-                : Math.min(
-                      gameConfigs.bot_maxbet * 0.5,
-                      (this.getAllBetAmount() * this.betChoiceRatio.SubOpts) / 100 - totalBetOnSubOpt,
-                      gameConfigs.choices_maxbet[choice]
-                  );
         }
 
         if (this.mainOpts.includes(choice)) {

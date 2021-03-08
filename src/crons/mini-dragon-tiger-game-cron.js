@@ -1,6 +1,6 @@
-import { Core, Table } from "sc-game-base";
+import { Core } from "sc-game-base";
 
-export default class VipSeDieGameCron extends Core.Crons.BaseGameCron {
+export default class MiniDragonTigerGameCron extends Core.Crons.BaseGameCron {
     isStartingTime(remainingTime, durations) {
         return remainingTime === durations.placingBets + durations.shakeThePlateDuration;
     }

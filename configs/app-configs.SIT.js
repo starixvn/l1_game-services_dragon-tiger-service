@@ -40,7 +40,7 @@ export default {
     },
     sentry: {
         sentryUrl: "http://ad4ae5bf7b34446daddaa328b3c59e47@10.99.99.187:800/121",
-        logIdentifier: "vipsedie",
+        logIdentifier: "mini-dragon-tiger",
         env: "SIT",
     },
     authenticateSettings: {

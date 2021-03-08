@@ -41,8 +41,8 @@ export default {
     },
     sentry: {
         sentryUrl: "https://f236f54fc8094619bc566f3903943637@sentryuat.sabagame.com/188",
-        logIdentifier: "vipsedie",
-        env: "LOCAL",
+        logIdentifier: "mini-dragon-tiger",
+        env: "LOCAL_1",
     },
     authenticateSettings: {
         audiences: ["api", "admin-api"],

@@ -1,6 +1,6 @@
 export default {
     id: 7,
-    name: "MiniDragonTiger",
+    name: "DragonTiger",
     durations: {
         wholeRound: 36,
         placingBets: 30,

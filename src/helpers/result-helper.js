@@ -1,26 +1,36 @@
+import { cards } from "../cards";
+
+const shuffleCards = (cards) => {
+    for (let i = cards.length; i > 0; i--) {
+        const randomCardIndex = Math.floor(Math.random() * i--);
+        const term = cards[i];
+
+        cards[i] = cards[randomCardIndex];
+        cards[randomCardIndex] = term;
+    }
+};
+
 const settlementRuleEntries = Object.entries({
-    odd: (totalReds) => totalReds % 2 === 1,
-    even: (totalReds) => totalReds % 2 === 0,
-    red3: (totalReds) => totalReds === 3,
-    red4: (totalReds) => totalReds === 4,
-    white3: (totalReds) => totalReds === 1,
-    white4: (totalReds) => totalReds === 0,
+    dragon: (roundResult) => roundResult.dragon.card > roundResult.tiger.card,
+    tiger: (roundResult) => roundResult.tiger.card > roundResult.dragon.card,
+    tie: (roundResult) => roundResult.tiger.card === roundResult.dragon.card,
 });
 
 export const generateResult = () => {
-    const red1 = (Math.random() * 2) >> 0 !== 0;
-    const red2 = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3 <= 10;
-    const red3 = (Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3) % 2 === 0;
-    const red4 = (Math.floor(Math.random() * 10000) + 1) % 2 !== 0;
+    const deskOfCards = [...cards];
 
-    return { red1, red2, red3, red4 };
+    shuffleCards(deskOfCards);
+    shuffleCards(deskOfCards);
+    shuffleCards(deskOfCards);
+
+    const result = deskOfCards.slice(0, 2);
+
+    return { dragon: result[0], tiger: result[1] };
 };
 
 export const getSettlementResult = (roundResult) => {
-    const totalReds = Object.values(roundResult).filter((value) => value === true).length;
-
     return settlementRuleEntries.reduce((result, [choice, rule]) => {
-        result[choice] = rule(totalReds);
+        result[choice] = rule(roundResult);
 
         return result;
     }, {});

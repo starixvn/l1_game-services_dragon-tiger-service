@@ -22,4 +22,4 @@ const schema = new mongoose.Schema({
 const bets = mongoose.model("MiniDragonTiger_cuoc", schema);
 const tmpBets = mongoose.model("MiniDragonTiger_tmpcuoc", schema);
 
-export { bets as MiniSeDieBets, tmpBets as MiniSeDieTmpBets };
+export { bets as MiniDragonTigerBets, tmpBets as MiniDragonTigerTmpBets };
