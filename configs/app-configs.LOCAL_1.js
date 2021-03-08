@@ -40,7 +40,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://f236f54fc8094619bc566f3903943637@sentryuat.sabagame.com/188",
+        sentryUrl: "https://4fb0ba123f1c44afb599ec79efa9f3dd@sentry.lumigame.com/12",
         logIdentifier: "mini-dragon-tiger",
         env: "LOCAL_1",
     },
