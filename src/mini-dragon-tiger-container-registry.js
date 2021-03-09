@@ -40,7 +40,7 @@ export default class MiniDragonTigerContainerRegistry extends Core.ContainerRegi
         super.registerApis();
 
         this.container.register({
-            roundQuery: asClass(MiniDragonTigerRoundQuery).singleton().proxy(),
+            roundQuery: asClass(MiniDragonTigerRoundQuery).singleton(),
         });
     }
 }
