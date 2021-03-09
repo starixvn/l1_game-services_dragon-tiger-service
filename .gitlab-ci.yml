@@ -1,4 +1,4 @@
 include:
-  - project: "ci/repos-ci/pentagon_l1_mini_dragon_tiger_service"
+  - project: "ci/repos-ci/pentagon_l1_dragon_tiger_service"
     ref: master
     file: "gitlab-ci.yml"
