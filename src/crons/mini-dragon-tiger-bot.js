@@ -1,19 +1,10 @@
-import mongoose from "mongoose";
+import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
-import { Core, Table } from "sc-game-base";
-
-import constants from "../constants";
+import { Core } from "sc-game-base";
 
 export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
-    /**
-     * @param {Table.TableGameDefinition} definition
-     * @param {Table.TableGameData} gameData
-     * @param {Core.BaseEventPublishers.BaseEventPublisher} publisher
-     * @param {mongoose.Model} userInfosRepository
-     * @param {mongoose.Model} tempBetsRepository
-     */
-    constructor(definition, gameData, publisher, userInfosRepository, tempBetsRepository) {
-        super(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+    constructor(definition, gameData, userInfosRepository) {
+        super(definition, gameData, userInfosRepository);
 
         this.betChoiceRatio = {
             MainOpts: 99, //odd | even
@@ -26,6 +17,41 @@ export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
         this.smallTicketRatio = 70;
         this.smallTickets = 0;
         this.resetAllBets();
+    }
+
+    async placeBet(bot) {
+        const choice = this.getBetChoice(bot);
+        const minBet = this.getMinBet();
+        const maxBet = this.getMaxBet(bot, choice);
+        const betAmount = this.getBetAmount(minBet, maxBet);
+
+        if (this.gameData.remainingTime > this.definition.durations.lockingBet) {
+            this.gameData.totalBets[choice] = (this.gameData.totalBets[choice] ?? 0) + betAmount;
+            this.allBets[choice] = (this.allBets[choice] ?? 0) + betAmount;
+            this.totalTickets++;
+
+            if (this.isSmallTicket(betAmount)) {
+                this.smallTickets++;
+            }
+        }
+    }
+
+    getBetAmount(minBet, maxBet) {
+        return this.chance.integer({ min: minBet, max: maxBet });
+    }
+
+    async reset() {
+        await super.reset();
+
+        const configs = this.gameData.gameConfigs;
+
+        if (configs?.botenabled) {
+            const bots = await userInfos.find({ type: true, disabled: false }, "id name").lean().exec();
+
+            this.bots = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
+        } else {
+            this.bots = [];
+        }
     }
 
     resetAllBotData() {
@@ -64,9 +90,7 @@ export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
                 ? this.getRandomChoiceFromGroup(underRatioGroups[0].group)
                 : this.getRandomChoiceFromGroup(this.mainOpts);
 
-        const previousUniqueChoices = bot.choices.filter((betChoice) => this.mainOpts.includes(betChoice));
-
-        return previousUniqueChoices.length > 0 ? previousUniqueChoices[0] : choice;
+        return choice;
     }
 
     getMaxBet(bot, choice) {
@@ -79,7 +103,7 @@ export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
 
         if (this.rareOpts.includes(choice)) {
             maxBet = Math.min(minBet * 10, gameConfigs.bot_maxbet * 0.2, gameConfigs.choices_maxbet[choice]);
-            const totalAmountOnRateOpts = this.getTotalAmountOfBotOnChoiceGroup(bot, this.rareOpts);
+            const totalAmountOnRateOpts = this.getTotalAmountOnChoiceGroup(bot, this.rareOpts);
 
             if (totalAmountOnRateOpts > 0) {
                 maxBet -= totalAmountOnRateOpts;
@@ -122,19 +146,6 @@ export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
 
     isSmallTicket(amount) {
         return amount <= this.getMinBet() * 50;
-    }
-
-    updateBotInRoomData(bot, choice, amount, balance) {
-        super.updateBotInRoomData(bot, choice, amount, balance);
-
-        this.allBets[choice] = this.allBets[choice] ? this.allBets[choice] + amount : amount;
-        this.smallTickets += this.isSmallTicket(amount) ? 1 : 0;
-    }
-
-    convertAmountToChip(amount) {
-        const chipList = constants.chips.filter((chip) => amount % chip === 0);
-
-        return chipList.length > 0 ? chipList[0] : this.getMinBet();
     }
 
     getTotalBetAmount(currentBet) {
