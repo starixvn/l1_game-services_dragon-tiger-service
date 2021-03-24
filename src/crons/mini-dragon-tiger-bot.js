@@ -103,7 +103,7 @@ export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
 
         if (this.rareOpts.includes(choice)) {
             maxBet = Math.min(minBet * 10, gameConfigs.bot_maxbet * 0.2, gameConfigs.choices_maxbet[choice]);
-            const totalAmountOnRateOpts = this.getTotalAmountOnChoiceGroup(bot, this.rareOpts);
+            const totalAmountOnRateOpts = this.getTotalAmountOnChoiceGroup(this.rareOpts);
 
             if (totalAmountOnRateOpts > 0) {
                 maxBet -= totalAmountOnRateOpts;
