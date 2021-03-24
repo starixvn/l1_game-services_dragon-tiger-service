@@ -1,7 +1,8 @@
 import awilix from "awilix";
 import { Core } from "sc-game-base";
 
-import PlaceBetConsumer from "./consumers/mini-dragon-tiger-place-bet-consumer";
+import { MiniDragonTigerPlaceBetConsumer, MiniDragonTigerSettleGameRoundConsumer } from "./consumers";
+
 import { MiniDragonTigerBot, MiniDragonTigerGameCron } from "./crons";
 import { MiniDragonTigerBets, MiniDragonTigerRounds, MiniDragonTigerTmpBets } from "./models";
 import MiniDragonTigerRoundQuery from "./query-apis/mini-dragon-tiger-round-query";
@@ -23,7 +24,8 @@ export default class MiniDragonTigerContainerRegistry extends Core.ContainerRegi
         super.registerConsumers();
 
         this.container.register({
-            placeBetConsumer: asClass(PlaceBetConsumer).singleton(),
+            placeBetConsumer: asClass(MiniDragonTigerPlaceBetConsumer).singleton(),
+            settleGameRoundConsumer: asClass(MiniDragonTigerSettleGameRoundConsumer).singleton().proxy(),
         });
     }
 
