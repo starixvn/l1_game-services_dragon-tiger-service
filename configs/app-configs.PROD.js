@@ -42,7 +42,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://26db550e29da4d038d1bb78ce1b79330@10.99.99.187:803/108",
+        sentryUrl: "http://617325875aa64061b18308868c5ef3c6@10.99.99.187:803/150",
         logIdentifier: "mini-dragon-tiger",
         env: "PROD",
     },
