@@ -41,7 +41,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://4fb0ba123f1c44afb599ec79efa9f3dd@sentry.lumigame.com/12",
+        sentryUrl: "https://13f39b8359404ed5aec23655e64ccf78@sentry.lumigame.com/2",
         logIdentifier: "mini-dragon-tiger",
         env: "LOCAL",
     },
@@ -49,13 +49,20 @@ export default {
         audiences: ["api", "admin-api"],
     },
     adminSecretKey: "asWDEerfOIdgsdqRTFabvmgh",
-    enableCorsWs: true,
+    enableCorsWs: false,
     corsUrls: [
         "http://localhost:7456",
         "http://localhost:7000",
         "http://localhost:3000",
         "http://games.lumigame.com",
+        "https://games.lumigame.com",
         "http://admin.lumigame.com",
+        "https://admin.lumigame.com",
         "http://l1-m.lumigame.com",
+        "https://l1-m.lumigame.com",
     ],
+    metrics: {
+        enable: true,
+        secretKey: "6c1f0f28-70f2-46ae-b031-22624a6cd8df",
+    },
 };
