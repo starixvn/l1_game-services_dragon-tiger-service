@@ -1,9 +1,10 @@
 import { stub, stubMongooseModelStupidly } from "jest-micro-auto-stub";
 import mongoose from "mongoose";
 import { Core } from "sc-game-base";
-import MiniDragonTigerBot from "../mini-dragon-tiger-bot";
-import gameSettings from "../../game-settings";
-import constants from "../../constants";
+
+import constants from "../../src/constants";
+import MiniDragonTigerBot from "../../src/crons/mini-dragon-tiger-bot";
+import gameSettings from "../../src/game-settings";
 
 const definition = new Core.GameDefinition(gameSettings);
 const gameData = new Core.GameData(0);

@@ -1,5 +1,5 @@
-import { generateResult, getSettlementResult } from "../result-helper";
-import { cards } from "../../cards";
+import { cards } from "../../src/cards";
+import { generateResult, getSettlementResult } from "../../src/helpers/result-helper";
 
 describe("generateResult test", () => {
     it("should return dragon/tiger card from desk of cards", () => {

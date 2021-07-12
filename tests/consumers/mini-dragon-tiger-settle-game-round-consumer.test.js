@@ -1,5 +1,6 @@
 import { Core } from "sc-game-base";
-import MiniDragonTigerSettleGameRoundConsumer from "../mini-dragon-tiger-settle-game-round-consumer";
+
+import MiniDragonTigerSettleGameRoundConsumer from "../../src/consumers/mini-dragon-tiger-settle-game-round-consumer";
 
 const definition = new Core.GameDefinition({ id: 1, name: "game name" });
 const gameData = new Core.GameData();
