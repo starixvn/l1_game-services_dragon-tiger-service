@@ -1,12 +1,15 @@
 import { cards } from "../cards";
+import { Chance } from "chance";
 
-const shuffleCards = (cards) => {
-    for (let i = cards.length; i > 0; i--) {
-        const randomCardIndex = Math.floor(Math.random() * i--);
-        const term = cards[i];
+const shuffleCards = (deskOfCards) => {
+    const chance = new Chance();
 
-        cards[i] = cards[randomCardIndex];
-        cards[randomCardIndex] = term;
+    for (let i = deskOfCards.length - 1; i >= 0; i -= 2) {
+        const randomCardIndex = Math.floor(chance.floating({ min: 0, max: 1 }) * (i + 1));
+        const term = deskOfCards[i];
+
+        deskOfCards[i] = deskOfCards[randomCardIndex];
+        deskOfCards[randomCardIndex] = term;
     }
 };
 

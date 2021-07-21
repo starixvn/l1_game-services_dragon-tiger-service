@@ -5,7 +5,6 @@ import { MiniDragonTigerPlaceBetConsumer, MiniDragonTigerSettleGameRoundConsumer
 
 import { MiniDragonTigerBot, MiniDragonTigerGameCron } from "./crons";
 import { MiniDragonTigerBets, MiniDragonTigerRounds, MiniDragonTigerTmpBets } from "./models";
-import MiniDragonTigerRoundQuery from "./query-apis/mini-dragon-tiger-round-query";
 
 const { asClass, asValue } = awilix;
 
@@ -35,14 +34,6 @@ export default class MiniDragonTigerContainerRegistry extends Core.ContainerRegi
         this.container.register({
             bot: asClass(MiniDragonTigerBot).singleton(),
             gameCron: asClass(MiniDragonTigerGameCron).singleton().proxy(),
-        });
-    }
-
-    registerApis() {
-        super.registerApis();
-
-        this.container.register({
-            roundQuery: asClass(MiniDragonTigerRoundQuery).singleton(),
         });
     }
 }
