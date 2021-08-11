@@ -40,7 +40,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://386ab9e2ec8a465bbcdd16fcca8b35fd@10.99.99.187:800/253",
+        sentryUrl: "http://52368c4019044019885440599c180bda@10.2.189.51:9009/24",
         logIdentifier: "mini-dragon-tiger",
         env: "SIT",
     },
@@ -58,6 +58,8 @@ export default {
         "https://sit-adm.sabagame.com",
         "http://sitm.sabagame.com",
         "https://sitm.sabagame.com",
+        "http://minisit.sgamesuat.com",
+        "https://minisit.sgamesuat.com",
     ],
     metrics: {
         enable: true,

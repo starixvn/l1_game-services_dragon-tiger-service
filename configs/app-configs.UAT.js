@@ -41,7 +41,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://386ab9e2ec8a465bbcdd16fcca8b35fd@10.99.99.187:800/253",
+        sentryUrl: "http://52368c4019044019885440599c180bda@10.2.189.51:9009/24",
         logIdentifier: "mini-dragon-tiger",
         env: "UAT",
     },
@@ -57,6 +57,8 @@ export default {
         "https://uat-adm.sabagame.com",
         "http://uatm.sabagame.com",
         "https://uatm.sabagame.com",
+        "http://miniuat.sgamesuat.com",
+        "https://miniuat.sgamesuat.com",
     ],
     metrics: {
         enable: true,
