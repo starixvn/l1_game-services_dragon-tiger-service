@@ -1,3 +1,6 @@
+variables:
+  SMOKE_PRODUCT_NAME: DragonTiger
+
 include:
   - project: "ci/repos-ci/pentagon_l1_dragon_tiger_service"
     ref: master
