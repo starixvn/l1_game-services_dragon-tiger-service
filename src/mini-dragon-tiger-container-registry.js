@@ -2,9 +2,8 @@ import awilix from "awilix";
 import { Core } from "sc-game-base";
 
 import { MiniDragonTigerPlaceBetConsumer, MiniDragonTigerSettleGameRoundConsumer } from "./consumers";
-
 import { MiniDragonTigerBot, MiniDragonTigerGameCron } from "./crons";
-import { MiniDragonTigerBets, MiniDragonTigerRounds, MiniDragonTigerTmpBets } from "./models";
+import { MiniDragonTigerBets, MiniDragonTigerRounds } from "./models";
 
 const { asClass, asValue } = awilix;
 
@@ -15,7 +14,6 @@ export default class MiniDragonTigerContainerRegistry extends Core.ContainerRegi
         this.container.register({
             roundsRepository: asValue(MiniDragonTigerRounds),
             betsRepository: asValue(MiniDragonTigerBets),
-            tempBetsRepository: asValue(MiniDragonTigerTmpBets),
         });
     }
 
