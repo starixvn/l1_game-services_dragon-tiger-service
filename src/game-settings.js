@@ -10,4 +10,5 @@ export default {
     choices: ["dragon", "tiger", "tie"],
     choicesMapper: { dragon: 1, tiger: 2, tie: 3 },
     defaultBetTracks: {},
+    hedgeBetGroups: [["dragon", "tiger"]],
 };
