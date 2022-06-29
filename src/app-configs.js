@@ -13,15 +13,16 @@ export default {
         placeBetTimeout: 4500,
         enableApiLogs: true,
     },
-    mainServerApiSettings: {
-        url: "http://localhost:8080/api",
-        auth: {
-            url: "http://auth.lumigame.com",
-            id: "game-services",
-            secret: "gameservices@20luminet&",
-        },
+    authenticateSettings: {
+        url: "http://auth.lumigame.com",
+        id: "game-services",
+        secret: "gameservices@20luminet&",
         requestTimeout: 10000,
-        useAuthenticate: true,
+        useAuthenticate: false,
+        audiences: ["api", "admin-api"],
+    },
+    userServiceSettings: {
+        url: "http://127.0.0.1:5000",
     },
     socketOptions: {
         pingInterval: 60 * 1000,
@@ -44,9 +45,6 @@ export default {
         sentryUrl: "https://547b4d1f691942a9a62db1cb021f14d1@sentry.lumigame.com/7",
         logIdentifier: "mini-dragon-tiger",
         env: "LOCAL",
-    },
-    authenticateSettings: {
-        audiences: ["api", "admin-api"],
     },
     adminSecretKey: "asWDEerfOIdgsdqRTFabvmgh",
     enableCorsWs: false,
