@@ -2,8 +2,10 @@ import { cards } from "../../src/cards";
 import { generateResult, getSettlementResult } from "../../src/helpers/result-helper";
 
 describe("generateResult test", () => {
-    it("should return dragon/tiger card from desk of cards", () => {
-        const actualResult = generateResult();
+    const testCases = [{ randomMode: undefined }, { randomMode: 1 }, { randomMode: 2 }, { randomMode: 3 }];
+
+    it.each(testCases)("should return dragon/tiger card from desk of cards", ({ randomMode }) => {
+        const actualResult = generateResult(randomMode);
 
         expect(cards).toContain(actualResult.dragon);
         expect(cards).toContain(actualResult.tiger);
