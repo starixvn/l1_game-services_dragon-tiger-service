@@ -1,9 +1,11 @@
 import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
+
 export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
-    constructor(definition, gameData, userInfosRepository) {
+    constructor(definition, gameData, userInfosRepository, appConfigs) {
         super(definition, gameData, userInfosRepository);
+        this.appConfigs = appConfigs;
 
         this.betChoiceRatio = {
             MainOpts: 99, //odd | even
@@ -22,7 +24,9 @@ export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
         const choice = this.getBetChoice(bot);
         const minBet = this.getMinBet();
         const maxBet = this.getMaxBet(bot, choice);
-        const betAmount = this.getBetAmount(minBet, maxBet);
+        const betAmount = this.appConfigs.convertChips
+            ? this.convertAmountToChip(helpers.numberHelper.getRandomNumberStep5(minBet, maxBet, true))
+            : this.getBetAmount(minBet, maxBet);
 
         if (this.gameData.remainingTime > this.definition.durations.lockingBet) {
             this.gameData.totalBets[choice] = (this.gameData.totalBets[choice] ?? 0) + betAmount;
@@ -144,5 +148,11 @@ export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
 
     getTotalBetAmount(currentBet) {
         return currentBet ? this.definition.choices.reduce((total, choice) => total + currentBet[choice], 0) : 0;
+    }
+
+    convertAmountToChip(amount) {
+        const chipList = this.appConfigs.chips.filter((chip) => amount / chip >= 1);
+
+        return chipList.length > 0 ? chipList[0] : this.getMinBet();
     }
 }
