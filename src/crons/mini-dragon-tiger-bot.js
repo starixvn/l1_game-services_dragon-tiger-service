@@ -24,7 +24,7 @@ export default class MiniDragonTigerBot extends Core.Crons.BaseBot {
         const choice = this.getBetChoice(bot);
         const minBet = this.getMinBet();
         const maxBet = this.getMaxBet(bot, choice);
-        const betAmount = this.appConfigs.convertChips
+        const betAmount = this.appConfigs.chips
             ? this.convertAmountToChip(helpers.numberHelper.getRandomNumberStep5(minBet, maxBet, true))
             : this.getBetAmount(minBet, maxBet);
 
