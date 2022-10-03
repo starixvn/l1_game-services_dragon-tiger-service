@@ -5,6 +5,7 @@ import { Core } from "sc-game-base";
 import constants from "../../src/constants";
 import MiniDragonTigerBot from "../../src/crons/mini-dragon-tiger-bot";
 import gameSettings from "../../src/game-settings";
+import appConfigs from "../../src/app-configs";
 
 const definition = new Core.GameDefinition(gameSettings);
 const gameData = new Core.GameData(0);
@@ -13,7 +14,7 @@ const publisher = stub(Core.BaseEventPublishers);
 /** @type {mongoose.Model}*/
 const tempBetsRepository = stubMongooseModelStupidly(mongoose.Model);
 const userInfosRepository = stubMongooseModelStupidly(mongoose.Model);
-const miniDragonTigerBot = new MiniDragonTigerBot(definition, gameData, publisher, userInfosRepository, tempBetsRepository);
+const miniDragonTigerBot = new MiniDragonTigerBot(definition, gameData, userInfosRepository, appConfigs);
 const bot = {
     id: 1,
     name: "bot1",
@@ -52,7 +53,7 @@ describe("placeBet test", () => {
     it("should ignore bot bet when lock bet", async () => {
         const tempGameData = new Core.GameData(3);
         tempGameData.gameConfigs = gameConfigs;
-        const tempMiniDragonTigerBot = new MiniDragonTigerBot(definition, tempGameData);
+        const tempMiniDragonTigerBot = new MiniDragonTigerBot(definition, tempGameData, null, appConfigs);
 
         await tempMiniDragonTigerBot.placeBet({});
 
@@ -64,7 +65,7 @@ describe("placeBet test", () => {
     it("should capture bot bet when bet on valid time", async () => {
         const tempGameData = new Core.GameData(23);
         tempGameData.gameConfigs = gameConfigs;
-        const tempMiniDragonTigerBot = new MiniDragonTigerBot(definition, tempGameData);
+        const tempMiniDragonTigerBot = new MiniDragonTigerBot(definition, tempGameData, null, appConfigs);
 
         await tempMiniDragonTigerBot.placeBet({});
 
@@ -87,7 +88,7 @@ describe("reset test", () => {
         tempGameData.gameConfigs = {
             botenabled: false,
         };
-        const tempMiniDragonTigerBot = new MiniDragonTigerBot(definition, tempGameData);
+        const tempMiniDragonTigerBot = new MiniDragonTigerBot(definition, tempGameData, null, appConfigs);
         tempMiniDragonTigerBot.bots = [bot];
 
         await tempMiniDragonTigerBot.reset();
