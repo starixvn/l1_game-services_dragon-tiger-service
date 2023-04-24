@@ -50,7 +50,7 @@ const random5 = (arr) => {
     return _.shuffle(_.shuffle(_.shuffle(arr)));
 };
 
-const randomModes = {
+export const randomModes = {
     1: [random1],
     2: [random2, random3],
     3: [random4, random5],
