@@ -1,10 +1,11 @@
 variables:
   SMOKE_PRODUCT_NAME: DragonTiger
+  DOCKER_SLIM: enable
+  ENABLE_NODEJS_INTEGRATION_TEST: 'true'
+  NODEJS_INTEGRATION_TEST_IMAGE_VERSION: hub.lumigame.com/base/node:18.13
+  NODEJS_INTEGRATION_TEST_DB_IMAGE_VERSION: hub.lumigame.com/docker-hub/library/mongo:4.4.8
 
 include:
-  - project: "ci/repos-ci/pentagon_l1_dragon_tiger_service"
-    ref: master
-    file: "gitlab-ci.yml"
-  - project: "ci/repos-ci/pentagon_l2_dragon_tiger_service"
-    ref: master
-    file: "gitlab-ci-mixing.yml"
+  - project: "ci/core-cicd"
+    ref: main
+    file: "luminet.gitlab-ci.yml"
