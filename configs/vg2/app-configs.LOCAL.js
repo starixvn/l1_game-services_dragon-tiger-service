@@ -52,4 +52,9 @@ export default {
         secretKey: "6c1f0f28-70f2-46ae-b031-22624a6cd8df",
     },
     chips: [20_000_000, 5_000_000, 1_000_000, 500_000, 200_000, 100_000, 50_000, 20_000, 10_000],
+    otel: {
+        system: "VG",
+        enabled: true,
+        endpoint: "http://10.10.50.69:4318/v1/traces",
+    },
 };
