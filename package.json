@@ -23,14 +23,13 @@
     "dependencies": {
         "d3-array": "^3.2.0",
         "lodash": "^4.17.19",
-        "nodemon": "^2.0.4",
         "random": "^3.0.6",
         "random-js": "^2.1.0",
         "sc-game-base": "4.1.0",
         "sc-instrument": "1.1.1"
     },
     "resolutions": {
-        "sc-base-apis": "1.18.3-beta.0",
+        "sc-base-apis": "1.18.2",
         "sc-base-database": "1.11.1"
     },
     "devDependencies": {
@@ -44,7 +43,8 @@
         "jest": "^26.6.3",
         "jest-extended": "^0.11.5",
         "jest-micro-auto-stub": "^1.0.6",
-        "jest-sonar-reporter": "^2.0.0"
+        "jest-sonar-reporter": "^2.0.0",
+        "nodemon": "^2.0.4"
     },
     "husky": {
         "hooks": {
