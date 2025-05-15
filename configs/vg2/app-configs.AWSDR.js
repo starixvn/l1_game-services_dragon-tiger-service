@@ -1,0 +1,61 @@
+export default {
+    hostingPort: 5000,
+    apiSettings: {
+        enabledApi: true,
+        apiUrl: "http://l2_game_api_awsdr:5000",
+        authUrl: "http://l2_auth_api_awsdr:5000",
+        client: {
+            id: "game-server",
+            secret: "gameserver@20luminet&",
+        },
+        useAuthenticate: true,
+        placeBetTimeout: 4000,
+        requestTimeout: 10000, // 10s
+        enabledApiLogs: true,
+    },
+    authenticateSettings: {
+        url: "http://l2_auth_api_awsdr:5000",
+        id: "game-services",
+        secret: "gameservices@20luminet&",
+        requestTimeout: 10000,
+        useAuthenticate: true,
+        audiences: ["api", "admin-api"],
+    },
+    userServiceSettings: {
+        url: "http://l2_user_service_awsdr:5000",
+    },
+    socketOptions: {
+        pingInterval: 60 * 1000,
+        pingTimeout: 60 * 1000,
+        transports: ["websocket"],
+        allowUpgrades: false,
+        perMessageDeflate: false,
+    },
+    enabledLogs: true,
+    database: {
+        url: "mongodb://lmn_backend:ilthODrRz8C4s2%5D%7B%7CLV%3Du%5D2vsf6o%5Ex0m@10.88.127.158:37101/?replicaSet=SabaL2DR",
+        options: {
+            dbName: "minigame",
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            auto_reconnect: true,
+        },
+    },
+    sentry: {
+        sentryUrl: "http://8ac47fca6d3e4a41908896a64ef201ac@10.2.190.51:9009/53",
+        logIdentifier: "mini-dragon-tiger",
+        env: "DR",
+    },
+    adminSecretKey: "asWDEer4yGdgsdqR4uqmKQZgh",
+    metrics: {
+        enable: true,
+        secretKey: "30d15293-c7de-4c77-9293-b85d6c5bfe1a",
+    },
+    enableMsgpackParser: true,
+    chips: [20_000_000, 5_000_000, 1_000_000, 500_000, 200_000, 100_000, 50_000, 20_000, 10_000, 2000, 1000, 500, 200, 100, 50, 10, 5, 1],
+    otel: {
+        system: "VG",
+        enabled: true,
+        endpoint: "http://10.2.189.50:4318/v1/traces",
+    },
+};
